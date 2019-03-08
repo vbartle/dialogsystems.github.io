@@ -22,6 +22,44 @@
                 {
                     "name": "AMAZON.NavigateHomeIntent",
                     "samples": []
+                },
+                {
+                    "name": "FoodIntent",
+                    "slots": [
+                        {
+                            "name": "dining_hall",
+                            "type": "AMAZON.FoodEstablishment"
+                        }
+                    ],
+                    "samples": [
+                        "Read the menu from {dining_hall}"
+                    ]
+                },
+                {
+                    "name": "EventsIntent",
+                    "slots": [],
+                    "samples": [
+                        "What events are there today"
+                    ]
+                },
+                {
+                    "name": "TransportationIntent",
+                    "slots": [
+                        {
+                            "name": "bus_stop",
+                            "type": "AMAZON.StreetName"
+                        }
+                    ],
+                    "samples": [
+                        "When is the next bus arriving at {bus_stop}"
+                    ]
+                },
+                {
+                    "name": "NewsIntent",
+                    "slots": [],
+                    "samples": [
+                        "Read me the latest Twitter post"
+                    ]
                 }
             ],
             "types": []
