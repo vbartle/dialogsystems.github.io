@@ -16,7 +16,7 @@ function setup() {
 	cam = createEasyCam()
 	cam.zoom(600)
 
-	string = "ALEXA"
+	string = "DataX"
 
 	size = width / 200 // Size of each cube making up the letters
 	res = 20 // Number of letters per character
