@@ -3,41 +3,75 @@
                            $ deactivate: deactivate virtualenv
 '''
 
+import pprint
 import requests
 import bs4 as bs
 
-source = requests.get('https://caldining.berkeley.edu/menu.php').content
+
+'''
+
+menu.php - returns the menu for the current date, whatever that might be
+menu
+menu_day2.php - returns the menu for current date + 1, whatever that might be
+Works for menu_day3, menu_day4
+
+menu_day5 - menu_day7 technical exists, but no data is available for that
+'''
+menu = {}
+
+today = "menu"
+today_plus_one = "menu_day2"
+today_plus_two = "menu_day3"
+today_plus_three = "menu_day4"
+
+base_url = 'https://caldining.berkeley.edu/'
+final_url = base_url + today + '.php'
+
+source = requests.get(final_url).content
 soup = bs.BeautifulSoup(source,features='lxml')
-
-
 node = soup.find_all("div", {"id": "node-177"})
+
+
+curr_location = ""
+curr_meal = ""
+curr_section = ""
 for node_tag in node:
     content_tags = node_tag.find_all("div", {"class": "content"})
     for content_tag in content_tags:
         menu_tags = content_tag.find_all("div", {"class": "menu_wrap_overall"})
         for menu_tag in menu_tags:  
-            # print(menu_tag.text)
             desc_tags = menu_tag.find_all("div", {"class": "desc_wrap_ck3"})
             for desc_tag in desc_tags:
-                # print(desc_tag)
                 for tag in desc_tag:
                     if tag.name == 'h3':
-                        if tag.has_key('class'):
-                            
+                        if tag.has_attr('class'):
                             if tag['class'][0] == 'location2':
-                                print("\n\n")
-                                print("----------------------")
-                                print(tag.text)
-                            if tag['class'][0] == 'location_period':                    
-                                print(tag.text)
-                                print("----------------------")
+                                curr_location = tag.text
+                                if curr_location not in menu:
+                                    menu[curr_location] = {}
+                                
+                                # print("\n\n")
+                                # print("----------------------")
+                                # print(curr_location)
+                            if tag['class'][0] == 'location_period':                   
+                                curr_meal = tag.text
+                                if curr_meal not in menu[curr_location]:
+                                    menu[curr_location][curr_meal] = {}
+                                
+                                # print(curr_meal)
+                                # print("----------------------")
                     elif tag.name == 'p':
-                        if tag.has_key('class'):
-                            print()
-                            print(tag.text)
-                            print("------------")
+                        if tag.has_attr('class'):
+                            curr_section = tag.text
+                            if curr_section not in menu[curr_location][curr_meal]:
+                                menu[curr_location][curr_meal][curr_section] = []
+                            
+                            # print()
+                            # print(tag.text)
+                            # print("------------")
                         else:
-                            print(tag.text)
+                            menu[curr_location][curr_meal][curr_section].append(tag.text)
+                            # print(tag.text)
                         
 
                 # para_tags = desc_tag.find_all("p")
@@ -86,3 +120,6 @@ for node_tag in node:
 # x = node.find(class='content')
 # print(type(node))
 # print(node.prettify())
+
+pp = pprint.PrettyPrinter(indent=1)
+pp.pprint(menu)
