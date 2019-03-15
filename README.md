@@ -1,4 +1,4 @@
-# dialogsystems.github.io
+# dialogsystems.ai
 
 This is the landing page for the project being worked on by award from the __[Alexa Innovation Fellowship](https://developer.amazon.com/alexa-fund/alexa-fellowship/innovation)__  to Alex Ojala, Vince Bartle, Ingrid Wu and Fang Shuo Deng at the __[SCET](https://scet.berkeley.edu/)__ in UC Berkeley. 
 
