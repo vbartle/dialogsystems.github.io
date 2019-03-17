@@ -11,7 +11,7 @@ import bs4 as bs
 '''
 
 menu.php - returns the menu for the current date, whatever that might be
-menu
+menucal
 menu_day2.php - returns the menu for current date + 1, whatever that might be
 Works for menu_day3, menu_day4
 
@@ -122,4 +122,4 @@ for node_tag in node:
 # print(node.prettify())
 
 pp = pprint.PrettyPrinter(indent=1)
-pp.pprint(menu)
+# pp.pprint(menu)
