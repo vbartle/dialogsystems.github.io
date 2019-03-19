@@ -1,0 +1,22 @@
+{
+  "name": "dialogsystems.github.io",
+  "version": "1.0.0",
+  "description": "This is the landing page for the project being worked on by award from the __[Alexa Innovation Fellowship](https://developer.amazon.com/alexa-fund/alexa-fellowship/innovation)__  to Alex Ojala, Vince Bartle, Ingrid Wu and Fang Shuo Deng at the __[SCET](https://scet.berkeley.edu/)__ in UC Berkeley.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vbartle/dialogsystems.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vbartle/dialogsystems.github.io/issues"
+  },
+  "homepage": "https://github.com/vbartle/dialogsystems.github.io#readme",
+  "dependencies": {
+    "ask-sdk": "^2.5.1"
+  }
+}
