@@ -26,6 +26,8 @@ Supports responses for:
 ### Known Issues
 
 1. Asking for a meal from a dining hall sometimes returns a response: "There was a problem with the requested skill's response". This happens about 5% of the time; need to figure out what's causing this and fix.
+2. things related to clark kerr don't seem to work
+3. Not related to the skill, but if your computer has Avast Antivirus, you need to disable web shield if not the Alexa Developer Console test will not take input (typing anything will cause it to load forever)
 
 Contents include:
 + NLP Lecture Content for IEOR 135/290. 
