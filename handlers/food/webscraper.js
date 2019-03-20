@@ -57,6 +57,15 @@ function isSection(word) {
     return word.match(/([A-Z]+ )*[A-Z]{2,}/g) != null
 }
 
+/*
+ * EVERYTHING BELOW HERE IS NOT REQUIRED FOR THE ALEXA APP
+ * PRESENT FOR TESTING PURPOSES
+ * 
+ * Uncomment if you want to get access to the endpoints of the RESTful API to see the
+ * results returned from the Scraper
+ */
+
+/*
 // EXPRESS STUFF
 const express = require('express')
 const port = process.env.PORT || 8000
@@ -70,9 +79,6 @@ const today = "menu"
 const today_plus_one = "menu_day2"
 const today_plus_two = "menu_day3"
 const today_plus_three = "menu_day4"
-
-// EVERYTHING BELOW HERE IS NOT REQUIRED FOR THE ALEXA APP
-// PRESENT FOR TESTING PURPOSES
 
 const app = express()
 
@@ -125,3 +131,4 @@ app.get('/test', function (req, res) {
 app.listen(port, function() {
     console.log("Started listening on port: " + port)
 });
+*/
