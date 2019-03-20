@@ -21,15 +21,22 @@ let nameToMeal = {
     "dinner": "Dinner",
     "brunch": "Brunch"
 }
+
+// default messages
+const INVALID_DINING_HALL = "...But Sorry, I couldn't find the dining hall you were asking for";
+const INVALID_MEAL = "...But Sorry, is this for breakfast, brunch, lunch or dinner?";
+const NOT_SERVING_MEAL = "...But Sorry, I don't think that meal is served today";
+const DINING_HALL_NOT_SERVING_FOOD = "...But Sorry, I don't think that dining hall is serving food today";
+
 // input: takes in a diningHall and a meal 
 // output: a string that's what alexa should read out
 exports.getMenuByLocationAndMeal = function(diningHall, meal) {
     return new Promise(((resolve, reject) => {
         let diningHallKey = nameToDiningHall[diningHall]
         if (diningHallKey == undefined) {
-            resolve("...But Sorry, I couldn't find the dining hall you were asking for");
+            resolve(INVALID_DINING_HALL);
         } else if (meal != "breakfast" && meal != "lunch" && meal != "dinner" && meal != "brunch") {
-            resolve("...But Sorry, is this for breakfast, brunch, lunch or dinner?");
+            resolve(INVALID_MEAL);
         }
         scraper.scrapeMenu(today, function(mealsInfo) {
             let hallMenu = mealsInfo[diningHallKey];
@@ -42,6 +49,7 @@ exports.getMenuByLocationAndMeal = function(diningHall, meal) {
                     for (var section in menu) {
                         foodList = menu[section];
                         foodList.forEach(function(food) {
+                            // handle some edge cases when the menu sometimes has this
                             if (food == "Please note this menu is subject to change.") {
                                 return;
                             } else if (food == "Thank you!") {
@@ -53,10 +61,10 @@ exports.getMenuByLocationAndMeal = function(diningHall, meal) {
                     mealDescription =  mealDescription.substring(0, mealDescription.length - 2) + "."
                     resolve(mealDescription);
                 } else {
-                    resolve("...But Sorry, I don't think that meal is served today");
+                    resolve(NOT_SERVING_MEAL);
                 }
             } else {
-                resolve("...But Sorry, I don't think that dining hall is serving food today");
+                resolve(DINING_HALL_NOT_SERVING_FOOD);
             }
         });
 

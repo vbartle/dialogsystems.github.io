@@ -206,7 +206,7 @@ exports.handler = async function (event, context) {
 /*
  * TEST: if you run this, you get the expected response
  */
-// diningHall = "foothill"
+// diningHall = "clark kerr"
 // meal = "lunch"
 // const resp =  getMenu.getMenuByLocationAndMeal(diningHall, meal);
 // resp.then(function(val) {
