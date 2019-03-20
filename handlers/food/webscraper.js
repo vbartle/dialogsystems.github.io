@@ -47,12 +47,8 @@ exports.scrapeMenu = function (day, callback) {
                 }
                 mealsInfo[location][mealPeriod] = meal
             });
-            // console.log(mealsInfo['Cafe_3']['Dinner']['SOUPS'])
-            // return res.status(200).json(mealsInfo);
-            // return mealsInfo
             callback(mealsInfo)
         } else {
-            // TODO: do something if there is an error
         }
     });
 }
@@ -75,6 +71,8 @@ const today_plus_one = "menu_day2"
 const today_plus_two = "menu_day3"
 const today_plus_three = "menu_day4"
 
+// EVERYTHING BELOW HERE IS NOT REQUIRED FOR THE ALEXA APP
+// PRESENT FOR TESTING PURPOSES
 
 const app = express()
 
@@ -87,24 +85,28 @@ app.get('/', function (req, res) {
     })
 });
 
+// Get the Json of today's menu
 app.get('/plusZero', function (req, res) {
     exports.scrapeMenu(today, function(mealsInfo) {
         return res.status(200).json(mealsInfo);
     });
 });
 
+// Get the Json of today + 1 days' menu
 app.get('/plusOne', function (req, res) {
     exports.scrapeMenu(today_plus_one, function(mealsInfo) {
         return res.status(200).json(mealsInfo);
     });
 });
 
+// Get the Json of today + 2 days' menu
 app.get('/plusTwo', function (req, res) {
     exports.scrapeMenu(today_plus_two, function(mealsInfo) {
         return res.status(200).json(mealsInfo);
     });
 });
 
+// Get the Json of today + 3 days' menu
 app.get('/plusThree', function (req, res) {
     exports.scrapeMenu(today_plus_three, function(mealsInfo) {
         return res.status(200).json(mealsInfo);
@@ -112,17 +114,9 @@ app.get('/plusThree', function (req, res) {
 });
 
 // TESTING
-let nameToDiningHall = {
-    "Cafe 3": "Cafe_3",
-    "Crossroads": "Crossroads",
-    "Clark Kerr": "Clark_Kerr_Campus",
-    "Foothill": "Foothill"
-}
-
 let getMenuByLocationAndMeal = require('./getMenu').getMenuByLocationAndMeal
-
 app.get('/test', function (req, res) {
-    getMenuByLocationAndMeal("Cafe 3", "Dinner", function(res) {
+    getMenuByLocationAndMeal("feoa 3", "Dinner", function(res) {
         console.log(res);
     });
 });
@@ -131,6 +125,3 @@ app.get('/test', function (req, res) {
 app.listen(port, function() {
     console.log("Started listening on port: " + port)
 });
-
-
-console.log(nameToDiningHall['x'] == undefined)
