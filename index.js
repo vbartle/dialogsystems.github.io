@@ -1,6 +1,7 @@
-var food = require('./handlers/food/getMenu');
+var getMenu = require('./handlers/food/getMenu');
 const Alexa = require('ask-sdk-core');
-//To test this in developer console, zip handlers, index.js, and node_modules and reupload to lamba function
+//To test this in developer console, zip handlers (folder at root), index.js (root), and node_modules (root) and reupload to lamba function
+// f
 
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
@@ -23,20 +24,42 @@ const FoodIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'FoodIntent';
   },
   handle(handlerInput) {
+
+    /*
+      * we should make the user specify a dining hall and a meal,
+      * if not the responce returned will be too darn long
+    */
+      var speechText = 'Sure thing! ';
+      diningHall = handlerInput.requestEnvelope.request.intent.slots.dining_hall.value 
+      meal = handlerInput.requestEnvelope.request.intent.slots.meal.value 
+
+      getMenu.getMenuByLocationAndMeal(diningHall, meal,function(res) {
+        speechText = speechText.concat(res);
+        return handlerInput.responseBuilder
+        .speak(speechText)
+        .withSimpleCard('Food', speechText)
+        .getResponse();
+      });
+      // speechText = speechText.concat(food.getMenuByLocationAndMeal(diningHall, meal));
+
+    /*
+    ORIGINAL
     var speechText = 'This is the Food Intent Handler!';
 
     //to test this in the alexa developer console, go to 'Test' then type 
     // 'tell berkeley bot read the menu from croads'
+
     if (handlerInput.requestEnvelope.request.intent.slots.dining_hall.value === 'croads') {
       speechText = speechText.concat(food.myMenu());
     } else {
       speechText = speechText.concat('Unrecognized dining hall');
     }
+    */
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .withSimpleCard('Food', speechText)
-      .getResponse();
+    // return handlerInput.responseBuilder
+    //   .speak(speechText)
+    //   .withSimpleCard('Food', speechText)
+    //   .getResponse();
   }
 };
 
@@ -186,3 +209,10 @@ exports.handler = async function (event, context) {
 
   return response;
 };
+
+// TEST: if you run this, you get the expected response
+// diningHall = "Cafe 3"
+// meal = "Breakfast"
+// getMenu.getMenuByLocationAndMeal(diningHall, meal,function(res) {
+//   console.log(res)
+// });

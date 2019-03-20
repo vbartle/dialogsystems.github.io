@@ -35,7 +35,6 @@ exports.getMenuByLocationAndMeal = function (diningHall, meal, callback) {
                 
                 for (var section in menu) {
                     foodList = menu[section];
-                    console.log(foodList)
                     foodList.forEach(function(food) {
                         if (food == "Please note this menu is subject to change.") {
                             return;
