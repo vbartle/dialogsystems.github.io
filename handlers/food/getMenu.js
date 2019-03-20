@@ -7,7 +7,6 @@ const content = '.content'
 const menu = '.menu_wrap_overall'
 
 // URLS TO SCRAPER
-const baseUrl = 'https://caldining.berkeley.edu/';
 const today = "menu"
 // TODO: support asking for up to 3 days from the current date
 
@@ -16,7 +15,7 @@ const today = "menu"
 let nameToDiningHall = {
     "cafe 3": "Cafe_3",
     "crossroads": "Crossroads",
-    "clark Kerr": "Clark_Kerr_Campus",
+    "clark kerr": "Clark_Kerr_Campus",
     "foothill": "Foothill"
 }
 

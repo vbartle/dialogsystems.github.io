@@ -1,6 +1,12 @@
-// WEB SCRAPER STUFF
+// IMPORTS
 var request = require('request');
 var cheerio = require('cheerio');
+
+//CONSTANTS
+const baseUrl = 'https://caldining.berkeley.edu/';
+const id = '#node-177'
+const content = '.content'
+const menu = '.menu_wrap_overall'
 
 // using exports.scrapeMenu to stay consistent with Ingrid's pattern in getMenu.js
 exports.scrapeMenu = function (day, callback) {
@@ -69,16 +75,6 @@ function isSection(word) {
 // EXPRESS STUFF
 const express = require('express')
 const port = process.env.PORT || 8000
-
-const id = '#node-177'
-const content = '.content'
-const menu = '.menu_wrap_overall'
-
-const baseUrl = 'https://caldining.berkeley.edu/';
-const today = "menu"
-const today_plus_one = "menu_day2"
-const today_plus_two = "menu_day3"
-const today_plus_three = "menu_day4"
 
 const app = express()
 
