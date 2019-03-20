@@ -23,7 +23,7 @@ const FoodIntentHandler = {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && handlerInput.requestEnvelope.request.intent.name === 'FoodIntent';
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
 
     /*
       * we should make the user specify a dining hall and a meal,
@@ -32,15 +32,13 @@ const FoodIntentHandler = {
       var speechText = 'Sure thing! ';
       diningHall = handlerInput.requestEnvelope.request.intent.slots.dining_hall.value 
       meal = handlerInput.requestEnvelope.request.intent.slots.meal.value 
-
-      getMenu.getMenuByLocationAndMeal(diningHall, meal,function(res) {
-        speechText = speechText.concat(res);
-        return handlerInput.responseBuilder
+    
+      const response = await getMenu.getMenuByLocationAndMeal(diningHall, meal);
+      speechText = speechText.concat(response);
+      return handlerInput.responseBuilder
         .speak(speechText)
         .withSimpleCard('Food', speechText)
         .getResponse();
-      });
-      // speechText = speechText.concat(food.getMenuByLocationAndMeal(diningHall, meal));
 
     /*
     ORIGINAL
@@ -55,11 +53,6 @@ const FoodIntentHandler = {
       speechText = speechText.concat('Unrecognized dining hall');
     }
     */
-
-    // return handlerInput.responseBuilder
-    //   .speak(speechText)
-    //   .withSimpleCard('Food', speechText)
-    //   .getResponse();
   }
 };
 
@@ -210,9 +203,12 @@ exports.handler = async function (event, context) {
   return response;
 };
 
-// TEST: if you run this, you get the expected response
-// diningHall = "Cafe 3"
-// meal = "Breakfast"
-// getMenu.getMenuByLocationAndMeal(diningHall, meal,function(res) {
-//   console.log(res)
-// });
+/*
+ * TEST: if you run this, you get the expected response
+ */
+// diningHall = "foothill"
+// meal = "lunch"
+// const resp =  getMenu.getMenuByLocationAndMeal(diningHall, meal);
+// resp.then(function(val) {
+//   console.log(val)
+// })
