@@ -2,6 +2,14 @@
 
 This is the landing page for the project being worked on by award from the __[Alexa Innovation Fellowship](https://developer.amazon.com/alexa-fund/alexa-fellowship/innovation)__  to Alex Ojala, Vince Bartle, Ingrid Wu and Fang Shuo Deng at the __[SCET](https://scet.berkeley.edu/)__ in UC Berkeley. 
 
+Contents include:
++ NLP Lecture Content for IEOR 135/290. 
++ UC Berkeley Alexa Skill Node.js hook.
+
+To-Do:
+1. Launch Alexa Skill
+2. Develop Web UI for Node.js hook.
+
 ### Status
 
 Supports responses for:
@@ -28,11 +36,3 @@ Supports responses for:
 1. Asking for a meal from a dining hall sometimes returns a response: "There was a problem with the requested skill's response". This happens about 5% of the time; need to figure out what's causing this and fix.
 2. things related to clark kerr don't seem to work
 3. Not related to the skill, but if your computer has Avast Antivirus, you need to disable web shield if not the Alexa Developer Console test will not take input (typing anything will cause it to load forever)
-
-Contents include:
-+ NLP Lecture Content for IEOR 135/290. 
-+ UC Berkeley Alexa Skill Node.js hook.
-
-To-Do:
-1. Launch Alexa Skill
-2. Develop Web UI for Node.js hook.
