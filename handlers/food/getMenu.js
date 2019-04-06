@@ -36,8 +36,8 @@ const DINING_HALL_NOT_SERVING_FOOD = "...but sorry, I don't think that dining ha
 
 // INPUT: takes in a diningHall and a meal 
 // OUTPUT: returns a promise that resolves to a string that Alexa can reach out
-exports.getMenuByLocationAndMeal = function(diningHall, meal) {
-    return new Promise(((resolve, reject) => {
+exports.getMenuByLocationAndMeal = async function(diningHall, meal) {
+    return new Promise((function(resolve, reject) {
         let diningHallKey = nameToDiningHall[diningHall]
         
         // enforce that a valid dininghall that is a key to a value in the nameToDiningHall struct above is specified
