@@ -20,10 +20,12 @@ const LaunchRequestHandler = {
 
 const FoodIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'FoodIntent';
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'FoodIntent';
   },
   async handle(handlerInput) {
+  // handle(handlerInput) {
 
     /*
       * we should make the user specify a dining hall and a meal,
@@ -32,14 +34,28 @@ const FoodIntentHandler = {
       var speechText = 'Sure thing! ';
       diningHall = handlerInput.requestEnvelope.request.intent.slots.dining_hall.value 
       meal = handlerInput.requestEnvelope.request.intent.slots.meal.value 
-    
+      // try {
+      //   const response = await getMenu.getMenuByLocationAndMeal(diningHall, meal);
+      //   speechText = speechText.concat(response);
+      // } catch (err) {
+      //   speechText = speechText.concat("but there was an error getting that information from the dining hall, please try again!");
+      // }
+
       const response = await getMenu.getMenuByLocationAndMeal(diningHall, meal);
       speechText = speechText.concat(response);
+      speechText = speechText.replace('&', 'and');
+
       return handlerInput.responseBuilder
         .speak(speechText)
         .withSimpleCard('Food', speechText)
         .getResponse();
-
+        /*
+          Invalid SSML Output Speech for requestId amz n1.echo-api.request.e7825b09-a112-4cc1-8a87-b837095f914d. 
+          Error: Fatal error occurred when processing SSML content. 
+          This usually happens when the SSML is not well formed. 
+          Error: Unexpected character ' ' (code 32) (missing name?)\n 
+          at [row,col {unknown-source}]: [1,433]"
+        */
     /*
     ORIGINAL
     var speechText = 'This is the Food Intent Handler!';
@@ -206,9 +222,35 @@ exports.handler = async function (event, context) {
 /*
  * TEST: if you run this, you get the expected response
  */
-diningHall = "foothill"
-meal = "lunch"
-const resp =  getMenu.getMenuByLocationAndMeal(diningHall, meal);
-resp.then(function(val) {
-  console.log(val)
-})
+
+// async function x() {
+//   var speechText = 'Sure thing! ';
+//   diningHall = "foothill"
+//   meal = "lunch"
+//   try {
+//     const response = await getMenu.getMenuByLocationAndMeal(diningHall, meal);
+//     speechText = speechText.concat(response);
+//     speechText = speechText.replace('&', 'and')
+//     console.log(speechText)
+//   } catch (err) {
+//     speechText = "Hmm I can't seem to find that";
+//   }
+//   return speechText
+// }
+
+// function y() {
+//   var speechText = 'Sure thing! ';
+//   diningHall = "foothill"
+//   meal = "lunch"
+//   getMenu.getMenuByLocationAndMeal(diningHall, meal).then(function(val) {
+//     speechText = speechText.concat(val);
+//     return speechText
+
+//   }).catch(function(err) {
+//     speechText = "Hmm I can't seem to find that";
+//     return speechText
+//   })
+// }
+
+// x()
+// console.log(y())
